@@ -12,7 +12,7 @@ const init = async () => {
         cors: {
           origin: ['http://localhost:8080'],
           headers: ['Authorization', 'Content-Type'],
-          credentials: true,
+          additionalHeaders: ['cache-control', 'x-requested-with']
         },
     },
   });
