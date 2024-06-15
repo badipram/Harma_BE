@@ -10,7 +10,7 @@ const init = async () => {
     host: '0.0.0.0',
     routes: {
         cors: {
-          origin: ['http://localhost:8080'],
+          origin: ['*'],
           headers: ['Authorization', 'Content-Type'],
           additionalHeaders: ['cache-control', 'x-requested-with']
         },
