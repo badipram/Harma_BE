@@ -1,7 +1,7 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable no-unused-vars */
 
-const { User } = require('../models/user');
+const { User } = require('../models');
 
 const validate = async ({ decoded }, request, h) => {
   try {
