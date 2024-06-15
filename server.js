@@ -20,7 +20,7 @@ const init = async () => {
   await server.register(require('@hapi/jwt'));
 
   server.auth.strategy('jwt', 'jwt', {
-    keys: process.env.JWT_SECRET_KEY,
+    keys: 'your_secret_key',
     verify: {
       aud: false,
       iss: false,

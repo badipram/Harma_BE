@@ -46,7 +46,7 @@ module.exports = [
           return h.response({ error: 'Invalid password' }).code(401);
         }
 
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET_KEY, { algorithm: 'HS256' });
+        const token = jwt.sign({ email: user.email }, 'your_secret_key', { algorithm: 'HS256' });
         return h.response({ token }).code(200);
       } catch (err) {
         return h.response({ error: err.message }).code(400);
