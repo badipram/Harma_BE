@@ -5,6 +5,7 @@ const { User } = require('../models/user');
 
 const validate = async ({ decoded }, request, h) => {
   try {
+    console.log(`Decode: ${decoded}`);
     const { email } = decoded.payload;
     const user = await User.findOne({
       where: { email: email },
