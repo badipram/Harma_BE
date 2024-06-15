@@ -9,9 +9,11 @@ const init = async () => {
     port: process.env.PORT || 3000,
     host: '0.0.0.0',
     routes: {
-      cors: {
-        origin: ['*'],
-      },
+        cors: {
+          origin: ['http://localhost:8080'],
+          headers: ['Authorization', 'Content-Type'],
+          credentials: true,
+        },
     },
   });
 
