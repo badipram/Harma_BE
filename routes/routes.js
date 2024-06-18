@@ -3,7 +3,7 @@
 const jwt = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
 const {
-  Penduduk, KepalaKeluarga, Keluarga, User,
+  Penduduk, KepalaKeluarga, Keluarga, User, Kegiatan
 } = require('../models');
 
 module.exports = [
@@ -287,4 +287,76 @@ module.exports = [
       }
     },
   },
+  {
+    method: 'GET',
+    path: '/kegiatan',
+    handler: async (request, h) => {
+      try {
+        const kegiatan = await Kegiatan.findAll();
+        return h.response(kegiatan).code(200);
+      } catch (error) {
+        return h.response({ error: error.message}).code(500);
+      }
+    }
+  },
+  {
+    method: 'POST',
+    path: '/kegiatan/tambah-kegiatan',
+    handler: async (request, h) => {
+      const {nama_kegiatan, waktu_kegiatan, tanggal_kegiatan, detail, lokasi } = request.payload;
+      try {
+        const addKegiatan = await Kegiatan.create({ nama_kegiatan, waktu_kegiatan, tanggal_kegiatan, detail, lokasi});
+        return h.response({ addKegiatan, message: "sukses" });
+      } catch (error) {
+        return h.response({ error: error.message }).code(400);
+      }
+    }
+  },
+  {
+    method: 'PUT',
+    path: '/kegiatan/edit-kegiatan/{id}',
+    handler: async (request, h) => {
+      try {
+        const { id } = request.params;
+        const { nama_kegiatan, waktu_kegiatan, tanggal_kegiatan, lokasi, detail } = request.payload;
+
+        const [rowsUpdate] = await Kegiatan.update(
+          { nama_kegiatan, waktu_kegiatan, tanggal_kegiatan, lokasi, detail},
+        {
+          where: { id_kegiatan: id}
+        });
+
+        if (rowsUpdate === 0) {
+          return h.response({ error: 'Kegiatan tidak ditemukan' }).code(404);
+        }
+
+        return h.response({
+          message: 'Kegiatan sukses diupdate',
+          rowsUpdate
+        }).code(200);
+      } catch (error) {
+        return h.response({ error: error.message}).code(500);
+      }
+    }
+  },
+  {
+    method: 'DELETE',
+    path: '/kegiatan/hapus-kegiatan/{id}',
+    handler: async (request, h) => {
+      try {
+        const { id } = request.params;
+        const rowsDeleted = await Kegiatan.destroy({
+          where: { id_kegiatan : id }
+        });
+
+        if (rowsDeleted === 0) {
+          return h.response({ error: 'Gagal menghapus kegiatan'}).code(404);
+        };
+
+        return h.response({ message: "Kegiatan berhasil dihapus "}).code(200);
+      } catch (error) {
+        return h.response({ error: error.message}).code(500)
+      }
+    }
+  }
 ];
