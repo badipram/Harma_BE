@@ -301,7 +301,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/kegiatan/tambah-kegiatan',
+    path: '/kegiatan/tambah',
     handler: async (request, h) => {
       const {nama_kegiatan, waktu_kegiatan, tanggal_kegiatan, detail, lokasi } = request.payload;
       try {

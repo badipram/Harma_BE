@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.TIME
       },
       tanggal_kegiatan: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
       },
       lokasi: {
         type: Sequelize.STRING

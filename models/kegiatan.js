@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     nama_kegiatan: DataTypes.STRING,
     waktu_kegiatan: DataTypes.TIME,
-    tanggal_kegiatan: DataTypes.DATEONLY,
+    tanggal_kegiatan: DataTypes.STRING,
     lokasi: DataTypes.STRING,
     detail: DataTypes.TEXT
   }, {
